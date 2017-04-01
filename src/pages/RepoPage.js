@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 
 import RepoList from '../components/RepoList';
-import { fetchData } from '../actions';
+import { fetchData, selectRepo } from '../actions';
 
 const host = 'https://api.github.com';
 const repositories =
@@ -12,7 +12,9 @@ const repositories =
 export class RepoPage extends Component {
   static propTypes = {
     fetchData: React.PropTypes.func.isRequired,
-    repos: React.PropTypes.object.isRequired
+    repos: React.PropTypes.object.isRequired,
+    selectRepo: React.PropTypes.func,
+    selected: React.PropTypes.bool
   }
 
   componentDidMount() {
@@ -20,7 +22,7 @@ export class RepoPage extends Component {
   }
 
   renderMainPart() {
-    const { isLoading, repos } = this.props.repos;
+    const { isLoading, repos, selected } = this.props.repos;
     if(!repos || isLoading) {
       return (
         <Text style={styles.Loading}>
@@ -32,6 +34,8 @@ export class RepoPage extends Component {
     return (
       <RepoList
         repos={repos}
+        selected={selected}
+        selectRepo={this.props.selectRepo}
       />
     );
   }
@@ -65,5 +69,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { fetchData }
+  { fetchData, selectRepo }
 )(RepoPage);

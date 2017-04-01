@@ -21,11 +21,11 @@ function RepoItem (props) {
   return (
     <TouchableHighlight
       onPress={() => props.selectRepo(id)}
-      underlayColor='#E0F2F'
+      underlayColor='#E0F2F1'
     >
       <View style={itemStyle}>
-        <Text style={styles.title}>{repo.name}</Text>
-        <Text style={styles.stars}>{`${repo.stargazers_count} stars`}</Text>
+        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.stars}>{`${stargazers_count} stars`}</Text>
         { props.isSelected ? <Text>{description}</Text> : null }
       </View>
     </TouchableHighlight>
@@ -39,7 +39,7 @@ const styles = {
   },
   selected: {
     backgroundColor: '#B2DFDB'
-  }
+  },
   stars: {
     paddingBottom: 8
   },

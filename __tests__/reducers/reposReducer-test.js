@@ -5,7 +5,8 @@ import reposReducer,
 import {
   loadReposRequest,
   loadReposSuccess,
-  loadReposFailure
+  loadReposFailure,
+  selectRepo
 } from '../../src/actions';
 import { repos as data } from '../../config/jest/mockData';
 
@@ -33,5 +34,13 @@ describe('reposReducer', () => {
 
   it('จัดการกับเคส success action แบบ snapshot', () => {
     expect(reposReducer(initialState, loadReposSuccess(data))).toMatchSnapshot();
-  })
+  });
+
+  it('จัดการกับเคส SELECT_REPO', () => {
+    expect(reposReducer(initialState, selectRepo(1000))).toMatchSnapshot();
+  });
+
+  it('จัดการกับเคส ยิง undefined state กับ unknow action', () => {
+    expect(reposReducer(undefined, { type: 'unknown'})).toMatchSnapshot();
+  });
 });

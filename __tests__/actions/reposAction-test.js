@@ -1,5 +1,5 @@
 import mockStore from '../../mocks/redux-mock-store';
-import { fetchData } from '../../src/actions';
+import { fetchData, selectRepo } from '../../src/actions';
 
 const store = mockStore();
 
@@ -21,6 +21,11 @@ describe('reposAction', () => {
     fetch.mockResponseFailure(mockError);
 
     await store.dispatch(fetchData('/test'));
+    expect(store.getActions()).toMatchSnapshot();
+  });
+
+  it('should handle selectRepo action', () => {
+    store.dispatch(selectRepo(1100));
     expect(store.getActions()).toMatchSnapshot();
   });
 });

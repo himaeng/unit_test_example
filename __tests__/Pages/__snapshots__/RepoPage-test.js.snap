@@ -32,6 +32,8 @@ exports[`RepoPage RepoPage จะ render เฉพาะ Loading text เมื�
         },
       ]
     }
+    selectRepo={undefined}
+    selected={undefined}
   />
 </View>
 `;

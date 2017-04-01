@@ -27,3 +27,12 @@ Array [
   },
 ]
 `;
+
+exports[`reposAction should handle selectRepo action 1`] = `
+Array [
+  Object {
+    "id": 1100,
+    "type": "select_repo",
+  },
+]
+`;

@@ -5,6 +5,16 @@ Object {
   "error": null,
   "isLoading": false,
   "repos": null,
+  "selected": null,
+}
+`;
+
+exports[`reposReducer จัดการกับเคส SELECT_REPO 1`] = `
+Object {
+  "error": null,
+  "isLoading": false,
+  "repos": null,
+  "selected": 1000,
 }
 `;
 
@@ -13,6 +23,7 @@ Object {
   "error": [Error: ดูผมดิ ผมเออเร่อ],
   "isLoading": false,
   "repos": null,
+  "selected": null,
 }
 `;
 
@@ -21,6 +32,7 @@ Object {
   "error": null,
   "isLoading": true,
   "repos": null,
+  "selected": null,
 }
 `;
 
@@ -48,5 +60,15 @@ Object {
       "stargazers_count": 499,
     },
   ],
+  "selected": null,
+}
+`;
+
+exports[`reposReducer จัดการกับเคส ยิง undefined state กับ unknow action 1`] = `
+Object {
+  "error": null,
+  "isLoading": false,
+  "repos": null,
+  "selected": null,
 }
 `;
