@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,  } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 
@@ -9,10 +9,10 @@ const host = 'https://api.github.com';
 const repositories =
   `${host}/search/repositories?q=react-native&sort=stars&order=desc`;
 
-class RepoPage extends Component {
+export class RepoPage extends Component {
   static propTypes = {
-    fetchData: PropTypes.func.isRequired,
-    repos: PropTypes.object.isRequired
+    fetchData: React.PropTypes.func.isRequired,
+    repos: React.PropTypes.object.isRequired
   }
 
   componentDidMount() {
