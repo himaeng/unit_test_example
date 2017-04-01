@@ -1,0 +1,38 @@
+import {
+  LOAD_REPOS_REQUEST,
+  LOAD_REPOS_SUCCESS,
+  LOAD_REPOS_FAILURE
+} from './types';
+
+export const loadReposSuccess = (data) => {
+  return ({
+    type: LOAD_REPOS_SUCCESS,
+    data
+  });
+};
+
+export const loadReposRequest = () => {
+  return ({
+    type: LOAD_REPOS_REQUEST
+  });
+};
+
+export const loadReposFailure = (error) => {
+  return ({
+    type: LOAD_REPOS_FAILURE,
+    error
+  });
+};
+
+export const fetchData = (endPoint) => {
+  return async (dispatch) => {
+    try {
+      dispatch(loadReposRequest());
+      const response      = await fetch(endPoint);
+      const responseJson  = await response.json();
+      dispatch(loadReposSuccess(responseJson.items));
+    } catch (error) {
+      dispatch(loadReposFailure(error));
+    }
+  };
+}

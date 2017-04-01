@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reposAction should handle reposAction for failure case 1`] = `
+Array [
+  Object {
+    "type": "load_repos_request",
+  },
+  Object {
+    "error": [Error: ดูสิแม่ ผมชื่อเออเร่อ],
+    "type": "load_repos_failure",
+  },
+]
+`;
+
+exports[`reposAction should handle reposAction for success case 1`] = `
+Array [
+  Object {
+    "type": "load_repos_request",
+  },
+  Object {
+    "data": Array [
+      Object {
+        "id": 1,
+      },
+    ],
+    "type": "load_repos_success",
+  },
+]
+`;
