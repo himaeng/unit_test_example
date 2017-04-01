@@ -7,7 +7,11 @@ import {
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
 
-const RepoList = (props) => {
+RepoList.propTypes = {
+  repos: PropTypes.array.isRequired
+}
+
+function RepoList (props) {
   const { repos } = props;
   const dataSource = ds.cloneWithRows(repos);
 
@@ -24,9 +28,5 @@ const RepoList = (props) => {
     />
   );
 };
-
-RepoList.propTypes = {
-  repos: PropTypes.array.isRequired
-}
 
 export default RepoList;
