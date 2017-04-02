@@ -27,9 +27,11 @@ function RepoList (props) {
           isSelected={repo.id === selected}
           repo={repo}
           selectRepo={selectRepo}
+          keyboardShouldPersistTaps='always'
         />
       )}
       contentContainerStyle={{ paddingVertical: 40 }}
+      keyboardShouldPersistTaps='always'
     />
   );
 };

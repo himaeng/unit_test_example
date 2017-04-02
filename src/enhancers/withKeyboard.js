@@ -20,6 +20,7 @@ const withKeyboard = Component => (
         Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
       this.keyboardDidHideListener =
         Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+      Keyboard.dismiss();
     }
 
     componentWillUnmount() {

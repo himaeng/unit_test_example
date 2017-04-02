@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, ScrollView } from 'react-native';
 
 import RepoList from '../components/RepoList';
-import { fetchData, selectRepo } from '../actions';
+import { loadReposRequest, selectRepo } from '../actions';
 import withKeyboard from '../enhancers/withKeyboard';
 
 const host = 'https://api.github.com';
@@ -12,14 +12,14 @@ const repositories =
 
 export class RepoPage extends Component {
   static propTypes = {
-    fetchData: React.PropTypes.func.isRequired,
+    loadReposRequest: React.PropTypes.func.isRequired,
     repos: React.PropTypes.object.isRequired,
     selectRepo: React.PropTypes.func,
     selected: React.PropTypes.bool
   }
 
   componentDidMount() {
-    this.props.fetchData(repositories);
+    this.props.loadReposRequest(repositories);
   }
 
   renderMainPart() {
@@ -33,25 +33,29 @@ export class RepoPage extends Component {
     }
 
     return (
-      <View>
+      <ScrollView
+        keyboardShouldPersistTaps='always'
+        >
         <TextInput
           style={styles.search}
           placeholder='search'
+          keyboardShouldPersistTaps='always'
         />
         <RepoList
           repos={repos}
           selected={selected}
           selectRepo={this.props.selectRepo}
+          keyboardShouldPersistTaps='always'
         />
-        <View style={{ height: this.props.keyboardHeight }} />
-      </View>
+        <View style={{ height: this.props.keyboardHeight }} keyboardShouldPersistTaps='always' />
+      </ScrollView>
     );
   }
 
   render() {
     const { isLoading, repos } = this.props.repos;
     return (
-      <View style={styles.container}>
+      <View style={styles.container} keyboardShouldPersistTaps='always'>
         {this.renderMainPart()}
       </View>
     );
@@ -85,5 +89,5 @@ const RepoPageWithKeyboard = withKeyboard(RepoPage);
 
 export default connect(
   mapStateToProps,
-  { fetchData, selectRepo }
+  { loadReposRequest, selectRepo }
 )(RepoPageWithKeyboard);

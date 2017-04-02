@@ -5,8 +5,15 @@ import thunk from 'redux-thunk';
 
 import RepoPage from './pages/RepoPage';
 import reducers from './reducers';
+import loggerMiddleware from './middlewares/loggerMiddleware';
+import asyncMiddleware from './middlewares/asyncMiddleware';
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const store = createStore(reducers, {},
+  applyMiddleware(
+    thunk,
+    loggerMiddleware,
+    asyncMiddleware
+  ));
 
 class App extends Component {
   render() {
