@@ -1,9 +1,10 @@
-import React, { Component,  } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 
 import RepoList from '../components/RepoList';
 import { fetchData, selectRepo } from '../actions';
+import withKeyboard from '../enhancers/withKeyboard';
 
 const host = 'https://api.github.com';
 const repositories =
@@ -32,11 +33,18 @@ export class RepoPage extends Component {
     }
 
     return (
-      <RepoList
-        repos={repos}
-        selected={selected}
-        selectRepo={this.props.selectRepo}
-      />
+      <View>
+        <TextInput
+          style={styles.search}
+          placeholder='search'
+        />
+        <RepoList
+          repos={repos}
+          selected={selected}
+          selectRepo={this.props.selectRepo}
+        />
+        <View style={{ height: this.props.keyboardHeight }} />
+      </View>
     );
   }
 
@@ -58,6 +66,12 @@ const styles = {
   loading: {
     fontSize: 20,
     alignSelf: 'center'
+  },
+  search: {
+    backgroundColor: '#ededed',
+    height: 25,
+    marginTop: 70,
+    marginHorizontal: 10
   }
 }
 
@@ -67,7 +81,9 @@ const mapStateToProps = (state) => {
   }
 }
 
+const RepoPageWithKeyboard = withKeyboard(RepoPage);
+
 export default connect(
   mapStateToProps,
   { fetchData, selectRepo }
-)(RepoPage);
+)(RepoPageWithKeyboard);
