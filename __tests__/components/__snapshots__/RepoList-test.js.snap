@@ -12,6 +12,7 @@ exports[`RepoList สามารถ render RepoList พร้อม mock data �
       "items": 3,
     }
   }
+  keyboardShouldPersistTaps="always"
   renderRow={[Function]}
   renderScrollComponent={[Function]}
 >

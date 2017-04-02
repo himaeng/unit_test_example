@@ -2,6 +2,7 @@
 
 exports[`RepoPage RepoPage จะ render เฉพาะ Loading text เมื่อ isLoading เป็น false และข้อมูล่โหลดเสร็จ 1`] = `
 <View
+  keyboardShouldPersistTaps="always"
   style={
     Object {
       "flex": 2,
@@ -9,37 +10,65 @@ exports[`RepoPage RepoPage จะ render เฉพาะ Loading text เมื�
     }
   }
 >
-  <Repolist
-    repos={
-      Array [
-        Object {
-          "description": "Useful description goes here.",
-          "id": 1,
-          "name": "Test 1",
-          "stargazers_count": 50000,
-        },
-        Object {
-          "description": "Useful description goes here.",
-          "id": 2,
-          "name": "Test 2",
-          "stargazers_count": 10000,
-        },
-        Object {
-          "description": "Useful description goes here.",
-          "id": 3,
-          "name": "Test 3",
-          "stargazers_count": 499,
-        },
-      ]
-    }
-    selectRepo={undefined}
-    selected={undefined}
-  />
+  <RCTScrollView
+    keyboardShouldPersistTaps="always"
+  >
+    <View>
+      <TextInput
+        keyboardShouldPersistTaps="always"
+        placeholder="search"
+        style={
+          Object {
+            "backgroundColor": "#ededed",
+            "height": 25,
+            "marginHorizontal": 10,
+            "marginTop": 70,
+          }
+        }
+      />
+      <Repolist
+        keyboardShouldPersistTaps="always"
+        repos={
+          Array [
+            Object {
+              "description": "Useful description goes here.",
+              "id": 1,
+              "name": "Test 1",
+              "stargazers_count": 50000,
+            },
+            Object {
+              "description": "Useful description goes here.",
+              "id": 2,
+              "name": "Test 2",
+              "stargazers_count": 10000,
+            },
+            Object {
+              "description": "Useful description goes here.",
+              "id": 3,
+              "name": "Test 3",
+              "stargazers_count": 499,
+            },
+          ]
+        }
+        selectRepo={undefined}
+        selected={undefined}
+      />
+      <View
+        keyboardShouldPersistTaps="always"
+        style={
+          Object {
+            "height": undefined,
+          }
+        }
+      />
+    </View>
+  </RCTScrollView>
 </View>
 `;
 
 exports[`RepoPage RepoPage จะ render เฉพาะ Loading text เมื่อ isLoading เป็น true และยังดึงข้อมูลไม่เสร็จ 1`] = `
 <View
+  keyboardShouldPersistTaps="always"
   style={
     Object {
       "flex": 2,

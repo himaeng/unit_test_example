@@ -15,7 +15,7 @@ describe('RepoPage', () => {
         renderer.create(
           <RepoPage
             repos={props}
-            fetchData={jest.fn()}
+            loadReposRequest={jest.fn()}
           />
         )
       )

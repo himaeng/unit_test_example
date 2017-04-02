@@ -1,5 +1,5 @@
 import mockStore from '../../mocks/redux-mock-store';
-import { fetchData, selectRepo } from '../../src/actions';
+import { loadReposRequest, selectRepo } from '../../src/actions';
 
 const store = mockStore();
 
@@ -12,7 +12,7 @@ describe('reposAction', () => {
     const response = '{"items": [{"id": 1}]}';
     fetch.mockResponseSuccess(response);
 
-    await store.dispatch(fetchData('/test'));
+    await store.dispatch(loadReposRequest('/test'));
     expect(store.getActions()).toMatchSnapshot();
   });
 
@@ -20,7 +20,7 @@ describe('reposAction', () => {
     const mockError = new Error('ดูสิแม่ ผมชื่อเออเร่อ');
     fetch.mockResponseFailure(mockError);
 
-    await store.dispatch(fetchData('/test'));
+    await store.dispatch(loadReposRequest('/test'));
     expect(store.getActions()).toMatchSnapshot();
   });
 

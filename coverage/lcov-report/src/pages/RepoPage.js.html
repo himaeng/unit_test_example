@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">91.67% </span>
+        <span class="strong">92.31% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>11/12</span>
+        <span class='fraction'>12/13</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>3/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">91.67% </span>
+        <span class="strong">92.31% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>11/12</span>
+        <span class='fraction'>12/13</span>
       </div>
     </div>
   </div>
@@ -116,7 +116,28 @@
 71
 72
 73
-74</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,6 +180,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,6 +201,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -185,16 +223,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component,  } from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, TextInput, ScrollView } from 'react-native';
 &nbsp;
 import RepoList from '../components/RepoList';
-import { fetchData, selectRepo } from '../actions';
+import { loadReposRequest, selectRepo } from '../actions';
+import withKeyboard from '../enhancers/withKeyboard';
 &nbsp;
 const host = 'https://api.github.com';
 const repositories =
@@ -202,14 +243,14 @@ const repositories =
 &nbsp;
 export class RepoPage extends Component {
   static propTypes = {
-    fetchData: React.PropTypes.func.isRequired,
+    loadReposRequest: React.PropTypes.func.isRequired,
     repos: React.PropTypes.object.isRequired,
     selectRepo: React.PropTypes.func,
     selected: React.PropTypes.bool
   }
 &nbsp;
   componentDidMount() {
-    this.props.fetchData(repositories);
+    this.props.loadReposRequest(repositories);
   }
 &nbsp;
   renderMainPart() {
@@ -223,18 +264,29 @@ export class RepoPage extends Component {
     }
 &nbsp;
     return (
-      &lt;RepoList
-        repos={repos}
-        selected={selected}
-        selectRepo={this.props.selectRepo}
-      /&gt;
+      &lt;ScrollView
+        keyboardShouldPersistTaps='always'
+        &gt;
+        &lt;TextInput
+          style={styles.search}
+          placeholder='search'
+          keyboardShouldPersistTaps='always'
+        /&gt;
+        &lt;RepoList
+          repos={repos}
+          selected={selected}
+          selectRepo={this.props.selectRepo}
+          keyboardShouldPersistTaps='always'
+        /&gt;
+        &lt;View style={{ height: this.props.keyboardHeight }} keyboardShouldPersistTaps='always' /&gt;
+      &lt;/ScrollView&gt;
     );
   }
 &nbsp;
   render() {
     const { isLoading, repos } = this.props.repos;
     return (
-      &lt;View style={styles.container}&gt;
+      &lt;View style={styles.container} keyboardShouldPersistTaps='always'&gt;
         {this.renderMainPart()}
       &lt;/View&gt;
     );
@@ -249,6 +301,12 @@ const styles = {
   loading: {
     fontSize: 20,
     alignSelf: 'center'
+  },
+  search: {
+    backgroundColor: '#ededed',
+    height: 25,
+    marginTop: 70,
+    marginHorizontal: 10
   }
 }
 &nbsp;
@@ -258,17 +316,19 @@ const mapStateToProps = <span class="fstat-no" title="function not covered" >(s<
   }
 }
 &nbsp;
+const RepoPageWithKeyboard = withKeyboard(RepoPage);
+&nbsp;
 export default connect(
   mapStateToProps,
-  { fetchData, selectRepo }
-)(RepoPage);
+  { loadReposRequest, selectRepo }
+)(RepoPageWithKeyboard);
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Apr 01 2017 15:58:50 GMT+0700 (ICT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Apr 02 2017 12:17:02 GMT+0700 (ICT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

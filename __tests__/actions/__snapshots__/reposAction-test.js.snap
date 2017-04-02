@@ -3,11 +3,13 @@
 exports[`reposAction should handle reposAction for failure case 1`] = `
 Array [
   Object {
+    "payload": Promise {
+      "_45": 0,
+      "_54": null,
+      "_65": [Error: ดูสิแม่ ผมชื่อเออเร่อ],
+      "_81": 2,
+    },
     "type": "load_repos_request",
-  },
-  Object {
-    "error": [Error: ดูสิแม่ ผมชื่อเออเร่อ],
-    "type": "load_repos_failure",
   },
 ]
 `;
@@ -15,15 +17,15 @@ Array [
 exports[`reposAction should handle reposAction for success case 1`] = `
 Array [
   Object {
-    "type": "load_repos_request",
-  },
-  Object {
-    "data": Array [
-      Object {
-        "id": 1,
+    "payload": Promise {
+      "_45": 0,
+      "_54": null,
+      "_65": Object {
+        "json": [Function],
       },
-    ],
-    "type": "load_repos_success",
+      "_81": 1,
+    },
+    "type": "load_repos_request",
   },
 ]
 `;

@@ -3,11 +3,11 @@ import reposReducer,
   initialState
 } from '../../src/reducers/reposReducer';
 import {
-  loadReposRequest,
-  loadReposSuccess,
-  loadReposFailure,
-  selectRepo
-} from '../../src/actions';
+  LOAD_REPOS_FAILURE,
+  LOAD_REPOS_REQUEST,
+  LOAD_REPOS_SUCCESS,
+  SELECT_REPO
+} from '../../src/actions/types';
 import { repos as data } from '../../config/jest/mockData';
 
 describe('reposReducer', () => {
@@ -17,15 +17,18 @@ describe('reposReducer', () => {
 
   it('จัดการกับเคส failure action', () => {
     const error = new Error('ดูผมดิ ผมเออเร่อ');
-    expect(reposReducer(initialState, loadReposFailure(error))).toMatchSnapshot();
+    const action = { type: LOAD_REPOS_FAILURE, error }
+    expect(reposReducer(initialState, action)).toMatchSnapshot();
   });
 
   it('จัดการกับเคส request action', () => {
-    expect(reposReducer(initialState, loadReposRequest())).toMatchSnapshot();
+    const action = { type: LOAD_REPOS_REQUEST };
+    expect(reposReducer(initialState, action)).toMatchSnapshot();
   });
 
   it('จัดการกับเคส success action', () => {
-    expect(reposReducer(initialState, loadReposSuccess(data))).toEqual({
+    const action = { type: LOAD_REPOS_SUCCESS, data };
+    expect(reposReducer(initialState, action)).toEqual({
       ...initialState,
       repos: data,
       isLoading: false
@@ -33,11 +36,13 @@ describe('reposReducer', () => {
   });
 
   it('จัดการกับเคส success action แบบ snapshot', () => {
-    expect(reposReducer(initialState, loadReposSuccess(data))).toMatchSnapshot();
+    const action = { type: LOAD_REPOS_SUCCESS, data };
+    expect(reposReducer(initialState, action)).toMatchSnapshot();
   });
 
   it('จัดการกับเคส SELECT_REPO', () => {
-    expect(reposReducer(initialState, selectRepo(1000))).toMatchSnapshot();
+    const action = { type: SELECT_REPO, id: 1000}
+    expect(reposReducer(initialState, action)).toMatchSnapshot();
   });
 
   it('จัดการกับเคส ยิง undefined state กับ unknow action', () => {
